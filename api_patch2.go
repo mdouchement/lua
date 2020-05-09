@@ -12,6 +12,7 @@ func CompileSource(script, name string, line int) (*Block, error) {
 
 // LoadBlock loads the Block of compiled statements.
 // It Pushes the Block on the stack.
+// This method is Threadsafe, you can share the same Block accross several Lua's VM.
 func (l *State) LoadBlock(proto *Block, env int) error {
 	envv := l.global
 	if env != 0 {

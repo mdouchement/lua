@@ -23,6 +23,8 @@ func AsFunc(proto *Block) *Function {
 }
 
 // LoadFunc adds to the stack the given Function with the given env.
+// This method is NOT Threadsafe, you cannot share the same Function accross several Lua's VM.
+// You can use sync.Pool to reuse instances.
 func (l *State) LoadFunc(f *Function, env int) {
 	envv := l.global
 	if env != 0 {
@@ -47,6 +49,8 @@ func (l *State) LoadFunc(f *Function, env int) {
 
 // SetFunc sets to the stack the given Function with the given env ate the given index.
 // Use at your own risk.
+// This method is NOT Threadsafe, you cannot share the same Function accross several Lua's VM.
+// You can use sync.Pool to reuse instances.
 func (l *State) SetFunc(i int, f *Function, env int) {
 	envv := l.global
 	if env != 0 {
